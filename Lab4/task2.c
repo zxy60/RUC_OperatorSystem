@@ -8,17 +8,22 @@ typedef struct{
     long long res;
 }data;
 void* lowHalf(void* arg){
-    data* val=(data*)arg;
+    data* val = (data*)arg;
+    long long local_res = 0; // 用局部变量累加
     for(int i=1; i<=val->val/2; i++){
-        val->res+=i;
+        local_res += i;
     }
+    val->res = local_res; // 执行完再写回结构体
     pthread_exit(NULL);
 }
+
 void* highHalf(void* arg){
-    data* val=(data*)arg;
-    for(int i=val->val/2+1;i<=val->val; i++){
-        val->res+=i;
+    data* val = (data*)arg;
+    long long local_res = 0; // 用局部变量累加
+    for(int i=val->val/2+1; i<=val->val; i++){
+        local_res += i;
     }
+    val->res = local_res; // 执行完再写回结构体
     pthread_exit(NULL);
 }
 
