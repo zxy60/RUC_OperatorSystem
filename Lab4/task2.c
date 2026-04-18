@@ -9,11 +9,11 @@ typedef struct{
 }data;
 void* lowHalf(void* arg){
     data* val = (data*)arg;
-    long long local_res = 0; // 用局部变量累加
+    long long local_res = 0;
     for(int i=1; i<=val->val/2; i++){
         local_res += i;
     }
-    val->res = local_res; // 执行完再写回结构体
+    val->res = local_res; 
     pthread_exit(NULL);
 }
 
